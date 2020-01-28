@@ -32,11 +32,47 @@ ul.addEventListener('change', (e) => {
 });
 
 ul.addEventListener('click', (e) => {
-    if (e.target.tagName == 'BUTTON') {
-        const li = e.target.parentNode;
-        const ul = li.parentNode;
-        ul.removeChild(li);
+    // if (e.target.tagName == 'BUTTON') {
+    //     const li = e.target.parentNode;
+    //     const ul = li.parentNode;
+    //     ul.removeChild(li);
+    // }
 
+    //ONE APPROACH
+    // if (e.target.className == 'removeB') {
+    //     const li = e.target.parentNode;
+    //     const ul = li.parentNode;
+    //     ul.removeChild(li);
+    // }
+
+    // SECOND APPROACH
+    if (e.target.tagName == 'BUTTON') {
+        const button = e.target;
+        const li = button.parentNode;
+        const ul = li.parentNode;
+
+
+        if (button.textContent == 'Remove') {
+
+            ul.removeChild(li);
+        } else if (button.textContent == 'Edit') {
+            console.log('edit');
+            const span = li.firstElementChild;
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = span.textContent;
+            li.insertBefore(input, span);
+            li.removeChild(span);
+            button.textContent = 'Save';
+        } else if (button.textContent == 'Save') {
+            console.log('Save');
+            const input = li.firstElementChild;
+            const span = document.createElement('span');
+            li.insertBefore(span, input);
+            span.textContent = input.value;
+            li.removeChild(input);
+            button.textContent = 'Edit';
+        }
 
     }
 
@@ -44,15 +80,23 @@ ul.addEventListener('click', (e) => {
 
 function addLi(text) {
     const li = document.createElement('li');
-    li.textContent = text;
+    const span = document.createElement('span');
+    span.textContent = text;
+    li.appendChild(span);
     //creating checkbox input with label
     const label = document.createElement('label');
     label.textContent = 'Confirmed ';
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
 
+    //creating edit button
+    const editButton = document.createElement('button');
+    // editButton.className = 'editB'
+    editButton.textContent = 'Edit';
+
     //creating remove button
     const removeButton = document.createElement('button');
+    // removeButton.className = 'removeB';
     removeButton.textContent = 'Remove';
     //added button to list item
 
@@ -61,6 +105,7 @@ function addLi(text) {
     label.appendChild(checkbox);
     //added label to the list item
     li.appendChild(label);
+    li.appendChild(editButton);
     li.appendChild(removeButton);
     return li;
 }
