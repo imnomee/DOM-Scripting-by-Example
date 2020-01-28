@@ -71,20 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     ul.addEventListener('click', (e) => {
-        // if (e.target.tagName == 'BUTTON') {
-        //     const li = e.target.parentNode;
-        //     const ul = li.parentNode;
-        //     ul.removeChild(li);
-        // }
 
-        //ONE APPROACH
-        // if (e.target.className == 'removeB') {
-        //     const li = e.target.parentNode;
-        //     const ul = li.parentNode;
-        //     ul.removeChild(li);
-        // }
-
-        // SECOND APPROACH
         if (e.target.tagName == 'BUTTON') {
             const button = e.target;
             const li = button.parentNode;
@@ -118,31 +105,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function addLi(text) {
+        function createElement(elName, property, value) {
+            const element = document.createElement(elName);
+            element[property] = value;
+            return element;
+
+        }
         const li = document.createElement('li');
-        const span = document.createElement('span');
-        span.textContent = text;
+
+        const span = createElement('span', 'textContent', text)
         li.appendChild(span);
+
         //creating checkbox input with label
-        const label = document.createElement('label');
-        label.textContent = 'Confirmed ';
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
+        const label = createElement('label', 'textContent', 'Confirmed');
+
+        const checkbox = createElement('input', 'type', 'checkbox');
 
         //creating edit button
-        const editButton = document.createElement('button');
-        // editButton.className = 'editB'
-        editButton.textContent = 'Edit';
+        const editButton = createElement('button', 'textContent', 'Edit');
 
         //creating remove button
-        const removeButton = document.createElement('button');
-        // removeButton.className = 'removeB';
-        removeButton.textContent = 'Remove';
-        //added button to list item
+        const removeButton = createElement('button', 'textContent', 'Remove');
 
 
-        //added checkbox the label item
         label.appendChild(checkbox);
-        //added label to the list item
         li.appendChild(label);
         li.appendChild(editButton);
         li.appendChild(removeButton);
