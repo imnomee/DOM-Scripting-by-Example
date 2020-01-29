@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (text != '') {
             const li = addLi(text)
             ul.appendChild(li);
+        } else {
+            alert('Please Enter a valid name.');
         };
     });
 
@@ -61,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(e.target.checked);
         const checkbox = e.target;
         const checked = checkbox.checked;
+
 
         //getting grandparent of checkbox
         const parentList = checkbox.parentNode.parentNode;
