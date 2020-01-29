@@ -78,26 +78,40 @@ document.addEventListener('DOMContentLoaded', () => {
             const ul = li.parentNode;
 
 
-            if (button.textContent == 'Remove') {
+            const nameActions = {
+                remove: () => {
+                    ul.removeChild(li);
+                },
 
-                ul.removeChild(li);
-            } else if (button.textContent == 'Edit') {
-                console.log('edit');
-                const span = li.firstElementChild;
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.value = span.textContent;
-                li.insertBefore(input, span);
-                li.removeChild(span);
-                button.textContent = 'Save';
-            } else if (button.textContent == 'Save') {
-                console.log('Save');
-                const input = li.firstElementChild;
-                const span = document.createElement('span');
-                li.insertBefore(span, input);
-                span.textContent = input.value;
-                li.removeChild(input);
-                button.textContent = 'Edit';
+                edit: () => {
+                    console.log('edit');
+                    const span = li.firstElementChild;
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = span.textContent;
+                    li.insertBefore(input, span);
+                    li.removeChild(span);
+                    button.textContent = 'Save';
+                },
+                save: () => {
+                    console.log('Save');
+                    const input = li.firstElementChild;
+                    const span = document.createElement('span');
+                    li.insertBefore(span, input);
+                    span.textContent = input.value;
+                    li.removeChild(input);
+                    button.textContent = 'Edit';
+                }
+            };
+            const action = button.textContent;
+            // nameActions[button.textContent]();
+            //BELOW CODE WORKS THE SAME AS ABOVE ONE LINER
+            if (action == 'Remove') {
+                nameActions.remove();
+            } else if (action == 'Edit') {
+                nameActions.edit();
+            } else if (action == 'Save') {
+                nameActions.save();
             }
 
         }
